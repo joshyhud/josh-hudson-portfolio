@@ -10,8 +10,8 @@ export async function getStaticPaths() {
 	const articles = await getCollection('blog');
 	const published = articles.filter(isPublishable);
 	validateArticles(articles, (path) => {
-		if (path.startsWith('/blog/')) return published.some((post) => `/blog/${post.id}` === path.replace(/\/$/, ''));
 		if (['/', '/blog', '/blog/', '/about', '/about/', '/work', '/work/'].includes(path)) return true;
+		if (path.startsWith('/blog/')) return published.some((post) => `/blog/${post.id}` === path.replace(/\/$/, ''));
 		const root = resolve('public');
 		const target = resolve(root, `.${path}`);
 		return target.startsWith(root + sep) && existsSync(target);

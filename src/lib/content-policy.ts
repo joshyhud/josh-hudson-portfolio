@@ -1,5 +1,10 @@
 import { z } from 'astro/zod';
 
+export function containsAffiliateTracking(value: string): boolean {
+  const decoded = value.replace(/%([0-9a-f]{2})/gi, (_, hex) => String.fromCharCode(parseInt(hex, 16)));
+  return /[?&]kaid=/i.test(decoded.replace(/&amp;/gi, '&'));
+}
+
 export const editorialFields = {
   affiliate: z.literal('kinsta').optional(),
   aiGenerated: z.boolean().default(false),
@@ -7,7 +12,9 @@ export const editorialFields = {
   searchIntent: z.enum(['informational', 'commercial', 'transactional']).optional(),
   internalLinksNote: z.string().trim().min(10).optional(),
   sources: z.array(z.object({
-    url: z.string().url().refine((value) => URL.canParse(value) && new URL(value).protocol === 'https:', 'Use HTTPS sources'),
+    url: z.string().url()
+      .refine((value) => URL.canParse(value) && new URL(value).protocol === 'https:', 'Use HTTPS sources')
+      .refine((value) => !containsAffiliateTracking(value), 'Use factual source URLs without affiliate tracking; affiliate links belong in the configured CTA.'),
     title: z.string().trim().min(1),
     checkedAt: z.string().date(),
   })).default([]),
@@ -34,7 +41,7 @@ type EditorialData = {
 
 export function isPublishable({ data, body = '' }: { data: EditorialData; body?: string }): boolean {
   if (!data.draft) {
-    if (/[?&]kaid=/i.test(body)) {
+    if (containsAffiliateTracking(body) || data.sources?.some((source) => containsAffiliateTracking(source.url))) {
       throw new Error('Use the centrally configured KinstaCTA instead of raw affiliate tracking URLs.');
     }
     if (/\bKinstaCTA\b/.test(body) && data.affiliate !== 'kinsta') {

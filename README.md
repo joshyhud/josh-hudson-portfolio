@@ -188,10 +188,12 @@ for drafts; independently verify that an approved article is live first.
 No automated third-party outreach, spam, paid advertising, fake reviews or
 testimonials are part of this system.
 
-The existing `modern-wordpress` article has been moved to draft pending human
-fact-checking and source review. Its embedded tracking link and unverified
-promotional offer were removed; its existing account of personal experience is
-preserved as source material, not independently verified by this system.
+The existing `modern-wordpress` article remains available at its original URL.
+Its embedded tracking link and unverified promotional offer were removed, and it
+has no affiliate CTA. Before opting that article into `affiliate: "kinsta"`,
+complete source/fact review and add the explicit approval record. Its existing
+account of personal experience is preserved as source material, not independently
+verified by this system.
 
 ### Existing-content audit and candidate backlog
 

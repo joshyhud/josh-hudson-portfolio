@@ -69,6 +69,12 @@ test('future dates and missing SEO intent fail publication checks', () => {
 
 test('raw tracking links and undisclosed reusable CTAs fail publication', () => {
   expect(() => isPublishable({ data: {}, body: `[Hosting](${KINSTA_AFFILIATE_URL})` })).toThrow(/centrally configured/);
+  const encoded = KINSTA_AFFILIATE_URL.replace('kaid=', '%6baid=');
+  expect(() => isPublishable({ data: {}, body: `[Hosting](${encoded})` })).toThrow(/centrally configured/);
+  for (const url of [KINSTA_AFFILIATE_URL, encoded]) {
+    expect(schema.safeParse({ sources: [{ url, title: 'Source', checkedAt: '2026-01-01' }] }).success).toBe(false);
+    expect(() => isPublishable({ data: { sources: [{ url, checkedAt: '2026-01-01' }] } })).toThrow(/centrally configured/);
+  }
   expect(() => isPublishable({ data: {}, body: '<KinstaCTA />' })).toThrow(/disclosure/);
 });
 

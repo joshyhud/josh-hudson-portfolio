@@ -1,4 +1,4 @@
-import { isPublishable } from './content-policy';
+import { containsAffiliateTracking, isPublishable } from './content-policy';
 
 type Article = {
   id: string;
@@ -19,7 +19,7 @@ export function validateArticles(articles: Article[], internalTargetExists: (pat
     const fail = (message: string) => errors.push(`${article.id}: ${message}`);
     const body = article.body ?? '';
     const prose = body.replace(/```[\s\S]*?```|~~~[\s\S]*?~~~/g, '');
-    if (/[?&]kaid=/i.test(body)) fail('Use the centrally configured CTA, not raw affiliate tracking URLs.');
+    if (containsAffiliateTracking(body)) fail('Use the centrally configured CTA, not raw affiliate tracking URLs.');
     if (/\bKinstaCTA\b/.test(body) && article.data.affiliate !== 'kinsta') fail('KinstaCTA requires affiliate metadata and disclosure.');
     if (!article.data.sources?.length) fail('Add dated, verified sources before requesting editorial approval.');
     const title = article.data.title.trim().toLowerCase();
