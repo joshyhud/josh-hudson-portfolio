@@ -1,9 +1,7 @@
 name: Mastodon publisher
 
 on:
-  push:
-    paths:
-      - "src/content/blog/**/*.md"
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -18,7 +16,7 @@ jobs:
       - name: Get blog file
         id: file
         run: |
-          BEFORE="${{ github.event.before }}"
+          BEFORE="${{ github.event.before || '0000000000000000000000000000000000000000' }}"
           AFTER="${{ github.sha }}"
 
           if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then

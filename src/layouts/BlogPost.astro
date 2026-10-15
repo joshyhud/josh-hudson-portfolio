@@ -3,9 +3,11 @@ import { Image } from 'astro:assets';
 import FormattedDate from '../components/FormattedDate.astro';
 import MainLayout from './MainLayout.astro';
 import SEO from "../components/SEO.astro";
+import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
+import KinstaCTA from '../components/KinstaCTA.astro';
 
 
-const { title, description, pubDate, updatedDate, heroImage, relatedPosts } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, relatedPosts, affiliate, sources = [] } = Astro.props;
 
 // JSON-LD article schema
  const articleSchema = {
@@ -52,7 +54,19 @@ const { title, description, pubDate, updatedDate, heroImage, relatedPosts } = As
     </Fragment>
 	<article>
 		<div class="prose container">
+			{affiliate === 'kinsta' && <AffiliateDisclosure />}
 			<slot />
+			{affiliate === 'kinsta' && <KinstaCTA />}
+			{sources.length > 0 && (
+				<section aria-label="Article sources">
+					<h2>Sources</h2>
+					<ul>
+						{sources.map((source) => (
+							<li><a href={source.url}>{source.title}</a> (checked {source.checkedAt})</li>
+						))}
+					</ul>
+				</section>
+			)}
 		</div>
 
 

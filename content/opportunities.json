@@ -1,0 +1,41 @@
+[
+  {
+    "id": "managed-wordpress-hosting-checklist",
+    "title": "A practical checklist for choosing managed WordPress hosting",
+    "targetKeyword": "managed WordPress hosting checklist",
+    "searchIntent": "commercial",
+    "priority": 1,
+    "audience": "Site owners comparing hosting options before a migration",
+    "readerOutcome": "Identify must-have requirements, trade-offs and questions to ask each shortlisted host.",
+    "outline": ["When managed hosting is and is not appropriate", "Requirements and budget worksheet", "Questions to verify with providers", "Migration risks and next steps"],
+    "sourceCandidates": ["https://kinsta.com/wordpress-hosting/", "https://kinsta.com/docs/"],
+    "internalLinks": ["/blog/wordpress-7/"],
+    "conversionFit": "Offer Kinsta as one option only after explaining who benefits and who should consider alternatives."
+  },
+  {
+    "id": "wordpress-migration-planning",
+    "title": "Plan a WordPress hosting migration without skipping the checks",
+    "targetKeyword": "WordPress hosting migration checklist",
+    "searchIntent": "informational",
+    "priority": 2,
+    "audience": "WordPress maintainers preparing to change hosting providers",
+    "readerOutcome": "Build a backup, staging, DNS, verification and rollback plan.",
+    "outline": ["Inventory and backup", "Staging and compatibility checks", "DNS and cutover planning", "Verification and rollback", "Choosing migration support"],
+    "sourceCandidates": ["https://kinsta.com/docs/", "https://developer.wordpress.org/advanced-administration/"],
+    "internalLinks": ["/blog/wordpress-7/"],
+    "conversionFit": "Mention hosting support only where it helps the reader's migration requirements."
+  },
+  {
+    "id": "wordpress-hosting-cost-worksheet",
+    "title": "Compare WordPress hosting costs beyond the headline price",
+    "targetKeyword": "WordPress hosting total cost",
+    "searchIntent": "commercial",
+    "priority": 3,
+    "audience": "Small teams estimating the full cost of operating a WordPress site",
+    "readerOutcome": "Compare provider quotes using the same workload, support and maintenance assumptions.",
+    "outline": ["Define the workload", "Compare included services and exclusions", "Account for maintenance time", "Check current terms and limits", "When a cheaper option makes sense"],
+    "sourceCandidates": ["https://kinsta.com/wordpress-hosting/"],
+    "internalLinks": [],
+    "conversionFit": "Link only after a balanced budget comparison; never invent prices or savings."
+  }
+]

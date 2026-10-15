@@ -1,6 +1,7 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { editorialFields, validateEditorial } from "./lib/content-policy";
 
 const blog = defineCollection({
   loader: glob({ base: "./src/content/blog", pattern: "**/*.{md,mdx}" }),
@@ -13,7 +14,8 @@ const blog = defineCollection({
       heroImage: image().optional(),
       tags: z.array(z.string()).optional(),
       draft: z.boolean().optional(),
-    }),
+      ...editorialFields,
+    }).superRefine(validateEditorial),
 });
 
 export const collections = { blog };
