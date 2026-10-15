@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://josh-hudson.co.uk/sitemap-index.xml

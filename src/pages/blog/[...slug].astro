@@ -2,9 +2,21 @@
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 import { isPublishable } from '../../lib/content-policy';
+import { validateArticles } from '../../lib/content-quality';
+import { existsSync } from 'node:fs';
+import { resolve, sep } from 'node:path';
 
 export async function getStaticPaths() {
-	const posts = (await getCollection('blog', isPublishable)).sort(
+	const articles = await getCollection('blog');
+	const published = articles.filter(isPublishable);
+	validateArticles(articles, (path) => {
+		if (path.startsWith('/blog/')) return published.some((post) => `/blog/${post.id}` === path.replace(/\/$/, ''));
+		if (['/', '/blog', '/blog/', '/about', '/about/', '/work', '/work/'].includes(path)) return true;
+		const root = resolve('public');
+		const target = resolve(root, `.${path}`);
+		return target.startsWith(root + sep) && existsSync(target);
+	}, process.env.CONTENT_REVIEW_SLUG);
+	const posts = published.sort(
 		(a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
 	);
 	return posts.map((post, index) => ({

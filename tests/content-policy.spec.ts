@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { editorialFields, validateEditorial, isPublishable } from '../src/lib/content-policy';
 import { KINSTA_AFFILIATE_URL } from '../src/config/affiliate';
+import { validateArticles } from '../src/lib/content-quality';
 
 const schema = z.object({ draft: z.boolean().optional(), ...editorialFields }).superRefine(validateEditorial);
 const approved = {
@@ -78,14 +79,15 @@ test('the draft workflow is local, non-overwriting and never approves content', 
     await mkdir(join(directory, 'content'));
     await mkdir(join(directory, 'src/content/blog'), { recursive: true });
     await copyFile(new URL('../scripts/content.mjs', import.meta.url), join(directory, 'scripts/content.mjs'));
+    await copyFile(new URL('../scripts/validate-content.mjs', import.meta.url), join(directory, 'scripts/validate-content.mjs'));
     await copyFile(new URL('../content/opportunities.json', import.meta.url), join(directory, 'content/opportunities.json'));
     const run = (...args: string[]) => execFileSync(process.execPath, [join(directory, 'scripts/content.mjs'), ...args], { encoding: 'utf8', stdio: 'pipe' });
-    const id = 'managed-wordpress-hosting-checklist';
+    const id = 'wordpress-migration-planning';
     expect(run('opportunities')).toContain(id);
     expect(run('brief', id)).toContain('Do not invent Kinsta');
     const body = join(directory, 'body.txt');
     await writeFile(body, '## Requirements\n\nDefine the requirements before comparing hosting options.');
-    run('draft', id, body);
+    run('draft', id, body, '--affiliate');
     const article = await readFile(join(directory, `src/content/blog/${id}.md`), 'utf8');
     expect(article).toContain('draft: true');
     expect(article).toContain('aiGenerated: true');
@@ -93,9 +95,57 @@ test('the draft workflow is local, non-overwriting and never approves content', 
     expect(article).not.toContain('review:');
     expect(() => run('draft', id, body)).toThrow();
     expect(() => run('draft', '../../escape', body)).toThrow();
+    expect(() => run('draft', 'managed-wordpress-hosting-checklist', body)).toThrow();
+    expect(run('research', id)).toContain('officialResearchStartingPoints');
+    run('draft', 'wordpress-hosting-cost-worksheet', body);
+    expect(await readFile(join(directory, 'src/content/blog/wordpress-hosting-cost-worksheet.md'), 'utf8')).not.toContain('affiliate:');
+    const checkSlugs = () => execFileSync(process.execPath, [join(directory, 'scripts/validate-content.mjs')], { stdio: 'pipe' });
+    expect(checkSlugs).not.toThrow();
+    await writeFile(join(directory, `src/content/blog/${id}.mdx`), 'Duplicate slug fixture');
+    expect(checkSlugs).toThrow();
     await writeFile(body, '<script>alert(1)</script>');
-    expect(() => run('draft', 'wordpress-migration-planning', body)).toThrow();
+    expect(() => run('draft', 'freelancer-client-hosting', body)).toThrow();
   } finally {
     await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('published reviewed content gets actionable quality errors', () => {
+  const data = { ...schema.parse(approved), title: 'Unique fixture title' };
+  const paragraph = 'A test fixture provides enough words to exercise validation independently from editorial judgment. '.repeat(22);
+  const article = { id: 'fixture', data, body: `## Requirements\n\n${paragraph}\n\n[Related guide](/blog/guide/)` };
+  expect(() => validateArticles([article], (path) => path === '/blog/guide/')).not.toThrow();
+  for (const body of [
+    '## Too short\nA short article.',
+    article.body + '\nTODO: add evidence.',
+    article.body + '\n[Broken link](/blog/missing/)',
+    article.body + '\n[Malformed URL](https://)',
+    article.body + '\n```js\nunclosed fence',
+    article.body + '\n## Requirements\nDuplicated heading.',
+  ]) {
+    expect(() => validateArticles([{ ...article, body }], (path) => path === '/blog/guide/')).toThrow(/Content validation failed/);
+  }
+  expect(() => validateArticles([article, { ...article, id: 'duplicate' }], () => true)).toThrow(/Duplicate article title/);
+  expect(() => validateArticles([{ ...article, data: { ...data, draft: true }, body: 'TODO' }], () => false)).not.toThrow();
+  expect(() => validateArticles([{ ...article, data: { ...data, draft: true }, body: 'TODO' }], () => false, 'fixture')).toThrow(/placeholder/);
+  expect(() => validateArticles([article], () => true, 'missing')).toThrow(/No article found/);
+  expect(() => validateArticles([{ ...article, body: `## Requirements\n\n${paragraph}` }], () => true)).toThrow(/internalLinksNote/);
+  expect(() => validateArticles([{
+    ...article,
+    data: { ...data, internalLinksNote: 'No sufficiently relevant published guide exists yet.' },
+    body: `## Requirements\n\n${paragraph}`,
+  }], () => true)).not.toThrow();
+});
+
+test('the opportunity backlog has twenty distinct, complete editorial candidates', async () => {
+  const entries = JSON.parse(await readFile(new URL('../content/opportunities.json', import.meta.url), 'utf8'));
+  expect(entries).toHaveLength(20);
+  expect(new Set(entries.map((entry: { id: string }) => entry.id)).size).toBe(20);
+  for (const entry of entries) {
+    for (const field of ['topic', 'title', 'searchIntent', 'audience', 'targetKeyword', 'secondaryTopics', 'commercialIntentScore', 'kinstaRelevance', 'competitionEstimate', 'suggestedCTA', 'internalLinks', 'reason']) {
+      expect(entry[field], `${entry.id}: ${field}`).toBeDefined();
+    }
+    expect(entry.commercialIntentScore).toBeGreaterThanOrEqual(1);
+    expect(entry.commercialIntentScore).toBeLessThanOrEqual(5);
   }
 });

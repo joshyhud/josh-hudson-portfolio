@@ -1,41 +1,190 @@
 [
   {
-    "id": "managed-wordpress-hosting-checklist",
-    "title": "A practical checklist for choosing managed WordPress hosting",
-    "targetKeyword": "managed WordPress hosting checklist",
-    "searchIntent": "commercial",
-    "priority": 1,
-    "audience": "Site owners comparing hosting options before a migration",
-    "readerOutcome": "Identify must-have requirements, trade-offs and questions to ask each shortlisted host.",
-    "outline": ["When managed hosting is and is not appropriate", "Requirements and budget worksheet", "Questions to verify with providers", "Migration risks and next steps"],
-    "sourceCandidates": ["https://kinsta.com/wordpress-hosting/", "https://kinsta.com/docs/"],
-    "internalLinks": ["/blog/wordpress-7/"],
-    "conversionFit": "Offer Kinsta as one option only after explaining who benefits and who should consider alternatives."
+    "id": "managed-wordpress-hosting-checklist", "priority": 1, "action": "update", "existingSlug": "modern-wordpress",
+    "topic": "Managed hosting explained", "title": "Managed WordPress hosting: requirements, trade-offs and a buying checklist",
+    "searchIntent": "commercial", "audience": "Site owners comparing hosting models", "targetKeyword": "managed WordPress hosting",
+    "secondaryTopics": ["included services", "maintenance responsibilities", "provider limitations"],
+    "commercialIntentScore": 4, "kinstaRelevance": "High: a managed hosting option, subject to verified fit", "competitionEstimate": "High; unverified editorial estimate",
+    "suggestedCTA": "Explore Kinsta WordPress hosting", "internalLinks": ["/blog/wordpress-7/"],
+    "reason": "Improve the existing hosting article instead of creating a duplicate explainer.",
+    "readerOutcome": "Choose a hosting model using requirements rather than blanket performance promises.",
+    "outline": ["Direct answer", "What to verify", "Who does not need managed hosting", "Provider checklist"],
+    "sourceCandidates": ["https://kinsta.com/docs/"], "conversionFit": "Only recommend after matching requirements."
   },
   {
-    "id": "wordpress-migration-planning",
-    "title": "Plan a WordPress hosting migration without skipping the checks",
-    "targetKeyword": "WordPress hosting migration checklist",
-    "searchIntent": "informational",
-    "priority": 2,
-    "audience": "WordPress maintainers preparing to change hosting providers",
-    "readerOutcome": "Build a backup, staging, DNS, verification and rollback plan.",
-    "outline": ["Inventory and backup", "Staging and compatibility checks", "DNS and cutover planning", "Verification and rollback", "Choosing migration support"],
-    "sourceCandidates": ["https://kinsta.com/docs/", "https://developer.wordpress.org/advanced-administration/"],
-    "internalLinks": ["/blog/wordpress-7/"],
-    "conversionFit": "Mention hosting support only where it helps the reader's migration requirements."
+    "id": "wordpress-migration-planning", "priority": 2, "action": "new",
+    "topic": "Migration planning", "title": "Plan a WordPress hosting migration without skipping the checks",
+    "searchIntent": "informational", "audience": "Maintainers changing providers", "targetKeyword": "WordPress hosting migration checklist",
+    "secondaryTopics": ["backups", "DNS cutover", "rollback"], "commercialIntentScore": 3,
+    "kinstaRelevance": "High if verified migration support fits the site", "competitionEstimate": "High; unverified editorial estimate",
+    "suggestedCTA": "Check Kinsta migration requirements", "internalLinks": ["/blog/wordpress-7/"],
+    "reason": "Existing content lacks a migration runbook.", "readerOutcome": "Prepare a cutover and rollback plan.",
+    "outline": ["Direct answer", "Inventory", "Staging", "Cutover", "Rollback"],
+    "sourceCandidates": ["https://kinsta.com/docs/", "https://developer.wordpress.org/advanced-administration/"], "conversionFit": "Support must match actual migration requirements."
   },
   {
-    "id": "wordpress-hosting-cost-worksheet",
-    "title": "Compare WordPress hosting costs beyond the headline price",
-    "targetKeyword": "WordPress hosting total cost",
-    "searchIntent": "commercial",
-    "priority": 3,
-    "audience": "Small teams estimating the full cost of operating a WordPress site",
-    "readerOutcome": "Compare provider quotes using the same workload, support and maintenance assumptions.",
-    "outline": ["Define the workload", "Compare included services and exclusions", "Account for maintenance time", "Check current terms and limits", "When a cheaper option makes sense"],
-    "sourceCandidates": ["https://kinsta.com/wordpress-hosting/"],
-    "internalLinks": [],
-    "conversionFit": "Link only after a balanced budget comparison; never invent prices or savings."
+    "id": "wordpress-hosting-cost-worksheet", "priority": 3, "action": "new",
+    "topic": "Total hosting costs", "title": "Compare WordPress hosting costs beyond the headline price",
+    "searchIntent": "commercial", "audience": "Small teams budgeting hosting", "targetKeyword": "WordPress hosting total cost",
+    "secondaryTopics": ["workload assumptions", "exclusions", "maintenance time"], "commercialIntentScore": 5,
+    "kinstaRelevance": "High for a like-for-like comparison, not invented savings", "competitionEstimate": "High; unverified editorial estimate",
+    "suggestedCTA": "Review Kinsta's current options", "internalLinks": [],
+    "reason": "A cost worksheet serves a distinct budgeting decision.", "readerOutcome": "Compare actual quotes on consistent assumptions.",
+    "outline": ["Direct answer", "Workload", "Quote worksheet", "Limits", "Alternatives"],
+    "sourceCandidates": ["https://kinsta.com/wordpress-hosting/"], "conversionFit": "Only if verified costs fit the budget."
+  },
+  {
+    "id": "wordpress-hosting-for-agencies", "priority": 4, "action": "new",
+    "topic": "Agency hosting selection", "title": "How digital agencies should shortlist WordPress hosting",
+    "searchIntent": "commercial", "audience": "Agencies managing client websites", "targetKeyword": "WordPress hosting for agencies",
+    "secondaryTopics": ["client access", "handover", "multi-site operations"], "commercialIntentScore": 5,
+    "kinstaRelevance": "High if verified collaboration requirements are met", "competitionEstimate": "High; unverified editorial estimate",
+    "suggestedCTA": "Evaluate Kinsta for your agency", "internalLinks": ["/blog/wordpress-7/"],
+    "reason": "Client ownership and operational access differ from single-site needs.", "readerOutcome": "Create an agency-specific shortlist."
+  },
+  {
+    "id": "small-business-wordpress-hosting", "priority": 5, "action": "new",
+    "topic": "Small business hosting", "title": "Choosing WordPress hosting for a small business on a realistic budget",
+    "searchIntent": "commercial", "audience": "Business owners without dedicated developers", "targetKeyword": "WordPress hosting for small businesses",
+    "secondaryTopics": ["support responsibilities", "cash flow", "business continuity"], "commercialIntentScore": 5,
+    "kinstaRelevance": "Conditional: managed hosting may exceed a small site's needs", "competitionEstimate": "High; unverified editorial estimate",
+    "suggestedCTA": "Compare Kinsta with your business requirements", "internalLinks": [],
+    "reason": "Budget and support ownership need a business-specific decision guide.", "readerOutcome": "Avoid buying unnecessary hosting capacity."
+  },
+  {
+    "id": "woocommerce-hosting-requirements", "priority": 6, "action": "new",
+    "topic": "WooCommerce operations", "title": "WooCommerce hosting requirements: checkout, caching and recovery",
+    "searchIntent": "commercial", "audience": "Online shop maintainers", "targetKeyword": "WordPress hosting for WooCommerce",
+    "secondaryTopics": ["uncached checkout", "order data", "recovery testing"], "commercialIntentScore": 5,
+    "kinstaRelevance": "High only after verifying store compatibility and limits", "competitionEstimate": "High; unverified editorial estimate",
+    "suggestedCTA": "Check Kinsta's current WooCommerce guidance", "internalLinks": ["/blog/wordpress-7/"],
+    "reason": "Transactional store workloads differ from brochure sites.", "readerOutcome": "Specify store-specific hosting acceptance tests."
+  },
+  {
+    "id": "high-traffic-wordpress-capacity", "priority": 7, "action": "new",
+    "topic": "Traffic and capacity planning", "title": "How to evaluate hosting for a high-traffic WordPress website",
+    "searchIntent": "commercial", "audience": "Publishers with traffic spikes", "targetKeyword": "hosting for high traffic WordPress",
+    "secondaryTopics": ["load testing", "cache hit rate", "capacity limits"], "commercialIntentScore": 5,
+    "kinstaRelevance": "Conditional on measured workload and verified limits", "competitionEstimate": "High; unverified editorial estimate",
+    "suggestedCTA": "Discuss your workload requirements with Kinsta", "internalLinks": ["/blog/lazy-loading/"],
+    "reason": "Replace unsupported 'fastest host' rankings with capacity questions.", "readerOutcome": "Define a measurable workload before requesting quotes."
+  },
+  {
+    "id": "freelancer-client-hosting", "priority": 8, "action": "new",
+    "topic": "Freelancer hosting handover", "title": "WordPress hosting for freelancers: who owns what after handover?",
+    "searchIntent": "commercial", "audience": "Freelancers handing sites to clients", "targetKeyword": "WordPress hosting for freelancers",
+    "secondaryTopics": ["billing ownership", "access revocation", "maintenance boundaries"], "commercialIntentScore": 4,
+    "kinstaRelevance": "Conditional on verified access and billing arrangements", "competitionEstimate": "Medium; unverified editorial estimate",
+    "suggestedCTA": "Check whether Kinsta fits your handover process", "internalLinks": [],
+    "reason": "Handover accountability is distinct from agency portfolio operations.", "readerOutcome": "Document hosting ownership and ongoing responsibilities."
+  },
+  {
+    "id": "managed-vs-shared-workload", "priority": 9, "action": "new",
+    "topic": "Hosting model decision worksheet", "title": "Managed vs shared WordPress hosting: a workload decision worksheet",
+    "searchIntent": "commercial", "audience": "Owners outgrowing an existing shared plan", "targetKeyword": "managed hosting vs shared hosting",
+    "secondaryTopics": ["diagnosing limits", "maintenance costs", "stay-or-move decision"], "commercialIntentScore": 4,
+    "kinstaRelevance": "Conditional; staying on shared hosting can be the right answer", "competitionEstimate": "High; unverified editorial estimate",
+    "suggestedCTA": "Compare managed hosting options at Kinsta", "internalLinks": [],
+    "reason": "Commission only after updating modern-wordpress; merge if the worksheet does not add distinct value.",
+    "readerOutcome": "Decide whether to move using current-site evidence rather than generic claims."
+  },
+  {
+    "id": "kinsta-alternatives-requirements", "priority": 10, "action": "new",
+    "topic": "Alternative provider shortlisting", "title": "Kinsta alternatives: compare requirements before comparing brands",
+    "searchIntent": "commercial", "audience": "Buyers for whom Kinsta may not fit", "targetKeyword": "Kinsta alternatives",
+    "secondaryTopics": ["budget", "unsupported requirements", "operational trade-offs"], "commercialIntentScore": 5,
+    "kinstaRelevance": "Direct but balanced; alternatives must be genuinely considered", "competitionEstimate": "High; unverified editorial estimate",
+    "suggestedCTA": "Recheck Kinsta only if it still fits", "internalLinks": [],
+    "reason": "Serve readers seeking reasons not to choose Kinsta.", "readerOutcome": "Shortlist alternatives using verified official evidence from each provider."
+  },
+  {
+    "id": "kinsta-vs-wp-engine-workflow", "priority": 11, "action": "new",
+    "topic": "Kinsta and WP Engine comparison", "title": "Kinsta vs WP Engine: an agency workflow comparison framework",
+    "searchIntent": "commercial", "audience": "Agencies with a two-provider shortlist", "targetKeyword": "Kinsta vs WP Engine",
+    "secondaryTopics": ["staging workflow", "access", "support terms"], "commercialIntentScore": 5,
+    "kinstaRelevance": "Direct; no winner without current evidence", "competitionEstimate": "High; unverified editorial estimate",
+    "suggestedCTA": "Review Kinsta against your shortlist", "internalLinks": [],
+    "reason": "A specific two-provider decision differs from a general alternatives list.", "readerOutcome": "Compare current official terms without fabricated benchmarks."
+  },
+  {
+    "id": "managed-wordpress-vs-self-managed-vps", "priority": 12, "action": "new",
+    "topic": "Managed service versus self-managed infrastructure", "title": "Managed WordPress hosting vs a self-managed VPS: who does the work?",
+    "searchIntent": "commercial", "audience": "Developers considering operating their own server", "targetKeyword": "managed WordPress hosting vs VPS",
+    "secondaryTopics": ["patching", "on-call ownership", "infrastructure control"], "commercialIntentScore": 4,
+    "kinstaRelevance": "Conditional on willingness to trade infrastructure control for a managed service", "competitionEstimate": "Medium; unverified editorial estimate",
+    "suggestedCTA": "Check Kinsta's managed service boundaries", "internalLinks": ["/blog/silence-in-the-library/"],
+    "reason": "Operational responsibility differs from the shared-hosting upgrade decision.", "readerOutcome": "Allocate server-management responsibilities realistically."
+  },
+  {
+    "id": "wordpress-performance-before-migration", "priority": 13, "action": "new",
+    "topic": "Performance diagnosis", "title": "Before changing WordPress hosts, identify what is actually slow",
+    "searchIntent": "informational", "audience": "Maintainers investigating slow sites", "targetKeyword": "improve WordPress performance",
+    "secondaryTopics": ["frontend weight", "response time", "plugins"], "commercialIntentScore": 2,
+    "kinstaRelevance": "Low until hosting is shown to be the bottleneck", "competitionEstimate": "High; unverified editorial estimate",
+    "suggestedCTA": "No CTA unless a hosting limitation is established", "internalLinks": ["/blog/lazy-loading/", "/blog/silence-in-the-library/"],
+    "reason": "Diagnostic guidance prevents an unjustified host recommendation.", "readerOutcome": "Separate frontend, plugin and hosting bottlenecks."
+  },
+  {
+    "id": "wordpress-staging-update-workflow", "priority": 14, "action": "new",
+    "topic": "Staging and update safety", "title": "A WordPress staging checklist for safer plugin and core updates",
+    "searchIntent": "informational", "audience": "Maintainers responsible for production updates", "targetKeyword": "WordPress staging update checklist",
+    "secondaryTopics": ["compatibility", "test data", "rollback"], "commercialIntentScore": 3,
+    "kinstaRelevance": "Conditional on verified staging behavior", "competitionEstimate": "Medium; unverified editorial estimate",
+    "suggestedCTA": "Check whether Kinsta's staging workflow fits", "internalLinks": ["/blog/wordpress-7/"],
+    "reason": "Extend the existing short WordPress update thought with an actionable operational guide.", "readerOutcome": "Create a repeatable pre-production update checklist."
+  },
+  {
+    "id": "wordpress-backup-recovery-questions", "priority": 15, "action": "new",
+    "topic": "Backup recovery evaluation", "title": "Questions to ask about WordPress hosting backups before you need a restore",
+    "searchIntent": "commercial", "audience": "Site owners selecting recovery arrangements", "targetKeyword": "WordPress hosting backup restore",
+    "secondaryTopics": ["retention", "restore drills", "independent backups"], "commercialIntentScore": 4,
+    "kinstaRelevance": "High only after verifying actual recovery terms", "competitionEstimate": "Medium; unverified editorial estimate",
+    "suggestedCTA": "Read Kinsta's current backup documentation", "internalLinks": [],
+    "reason": "A recovery-focused buying decision is not covered by a migration runbook.", "readerOutcome": "Test restore capability instead of assuming backups are sufficient."
+  },
+  {
+    "id": "wordpress-hosting-support-evaluation", "priority": 16, "action": "new",
+    "topic": "Support scope", "title": "How to evaluate WordPress hosting support without fake response-time claims",
+    "searchIntent": "commercial", "audience": "Buyers assigning incident responsibility", "targetKeyword": "WordPress hosting support comparison",
+    "secondaryTopics": ["escalation", "scope exclusions", "incident ownership"], "commercialIntentScore": 4,
+    "kinstaRelevance": "High if the documented support scope fits", "competitionEstimate": "Medium; unverified editorial estimate",
+    "suggestedCTA": "Review Kinsta's documented support scope", "internalLinks": [],
+    "reason": "Support ownership deserves evidence separate from performance rankings.", "readerOutcome": "Ask concrete scope and escalation questions."
+  },
+  {
+    "id": "membership-site-hosting", "priority": 17, "action": "new",
+    "topic": "Logged-in WordPress workloads", "title": "Hosting a WordPress membership site: questions about uncached traffic",
+    "searchIntent": "commercial", "audience": "Membership and learning-platform operators", "targetKeyword": "WordPress membership site hosting",
+    "secondaryTopics": ["concurrent users", "uncached pages", "background tasks"], "commercialIntentScore": 4,
+    "kinstaRelevance": "Conditional on tested dynamic workload requirements", "competitionEstimate": "Medium; unverified editorial estimate",
+    "suggestedCTA": "Discuss your membership workload with Kinsta", "internalLinks": [],
+    "reason": "Logged-in workloads differ from high-traffic public publishing.", "readerOutcome": "Specify realistic concurrent-user acceptance tests."
+  },
+  {
+    "id": "wordpress-multisite-hosting", "priority": 18, "action": "new",
+    "topic": "WordPress Multisite requirements", "title": "WordPress Multisite hosting: compatibility questions before choosing a provider",
+    "searchIntent": "commercial", "audience": "Maintainers of a Multisite network", "targetKeyword": "WordPress Multisite hosting",
+    "secondaryTopics": ["domain mapping", "network recovery", "plugin compatibility"], "commercialIntentScore": 4,
+    "kinstaRelevance": "Conditional on current verified Multisite support and limits", "competitionEstimate": "Medium; unverified editorial estimate",
+    "suggestedCTA": "Verify Kinsta's current Multisite requirements", "internalLinks": ["/blog/wordpress-7/"],
+    "reason": "A network has compatibility and recovery concerns absent from single-site guides.", "readerOutcome": "Verify network requirements before moving."
+  },
+  {
+    "id": "wordpress-hosting-limits-checklist", "priority": 19, "action": "new",
+    "topic": "Plan limit interpretation", "title": "Read WordPress hosting limits before signing up",
+    "searchIntent": "commercial", "audience": "Buyers comparing plan terms", "targetKeyword": "WordPress hosting plan limits",
+    "secondaryTopics": ["visits definitions", "storage", "overage terms"], "commercialIntentScore": 5,
+    "kinstaRelevance": "High when supported by current official plan definitions", "competitionEstimate": "Medium; unverified editorial estimate",
+    "suggestedCTA": "Check Kinsta's current plan definitions", "internalLinks": [],
+    "reason": "Explain contractual capacity terms rather than repeat the cost worksheet.", "readerOutcome": "Identify limits and questions needing provider confirmation."
+  },
+  {
+    "id": "wordpress-hosting-exit-plan", "priority": 20, "action": "new",
+    "topic": "Portability and exit planning", "title": "Before choosing WordPress hosting, write an exit plan",
+    "searchIntent": "commercial", "audience": "Owners concerned about lock-in", "targetKeyword": "WordPress hosting portability",
+    "secondaryTopics": ["data export", "domain ownership", "offboarding"], "commercialIntentScore": 3,
+    "kinstaRelevance": "Conditional; a recommendation must acknowledge exit requirements", "competitionEstimate": "Low; unverified editorial estimate",
+    "suggestedCTA": "Review Kinsta only after checking portability", "internalLinks": [],
+    "reason": "Provider exit readiness is distinct from an inbound migration checklist.", "readerOutcome": "Record a verifiable plan for leaving any chosen provider."
   }
 ]

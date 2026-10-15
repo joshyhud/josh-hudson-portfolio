@@ -2,15 +2,15 @@
 import { KINSTA_AFFILIATE_URL } from '../config/affiliate';
 
 interface Props {
-  label?: string;
+  text?: string;
 }
 
-const { label = 'Explore Kinsta WordPress hosting' } = Astro.props;
+const { text = 'Explore Kinsta WordPress hosting' } = Astro.props;
 ---
 
 <aside class="kinsta-cta" aria-label="Hosting option">
   <p>Considering managed WordPress hosting? Compare your requirements and budget before choosing a provider.</p>
-  <a href={KINSTA_AFFILIATE_URL} rel="sponsored nofollow">{label}</a>
+  <a href={KINSTA_AFFILIATE_URL} rel="sponsored nofollow">{text}</a>
   <p><small>Affiliate link — I may earn a commission if you sign up through this link.</small></p>
 </aside>
 

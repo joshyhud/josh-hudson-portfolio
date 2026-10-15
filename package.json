@@ -7,6 +7,8 @@
   },
   "scripts": {
     "content": "node scripts/content.mjs",
+    "prebuild": "node scripts/validate-content.mjs",
+    "validate:content": "npm run build",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

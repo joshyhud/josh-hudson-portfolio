@@ -5,6 +5,7 @@ export const editorialFields = {
   aiGenerated: z.boolean().default(false),
   targetKeyword: z.string().trim().min(1).optional(),
   searchIntent: z.enum(['informational', 'commercial', 'transactional']).optional(),
+  internalLinksNote: z.string().trim().min(10).optional(),
   sources: z.array(z.object({
     url: z.string().url().refine((value) => URL.canParse(value) && new URL(value).protocol === 'https:', 'Use HTTPS sources'),
     title: z.string().trim().min(1),
@@ -26,6 +27,7 @@ type EditorialData = {
   aiGenerated?: boolean;
   targetKeyword?: string;
   searchIntent?: string;
+  internalLinksNote?: string;
   sources?: { url: string; checkedAt: string }[];
   review?: { approvedBy: string; approvedAt: string };
 };
