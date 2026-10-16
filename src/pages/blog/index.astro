@@ -4,8 +4,9 @@ import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 import MainLayout from '../../layouts/MainLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { isPublishable } from '../../lib/content-policy';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+const posts = (await getCollection('blog', isPublishable)).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
