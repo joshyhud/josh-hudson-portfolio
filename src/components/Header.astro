@@ -1,15 +1,26 @@
 ---
-import { SITE_TITLE } from '../consts';
-import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE } from "../consts";
+import HeaderLink from "./HeaderLink.astro";
+import Co2 from "./Co2.astro";
 ---
 
+<Co2 />
+
 <header class="site-header">
-	<a class="btn logo" href="/">{SITE_TITLE}</a>
-	<nav>
-		<div class="internal-links">
-			<HeaderLink class="btn primary" href="/work">Work</HeaderLink>
-			<HeaderLink class="btn primary" href="/about">About</HeaderLink>
-			<HeaderLink class="btn primary" href="/blog">Blog</HeaderLink>
-		</div>
-	</nav>
+  <a class="btn logo" href="/">
+    {SITE_TITLE}
+  </a>
+  <nav>
+    <div class="internal-links">
+      <HeaderLink class="btn primary" href="/work">
+        Work
+      </HeaderLink>
+      <HeaderLink class="btn primary" href="/about">
+        About
+      </HeaderLink>
+      <HeaderLink class="btn primary" href="/blog">
+        Blog
+      </HeaderLink>
+    </div>
+  </nav>
 </header>

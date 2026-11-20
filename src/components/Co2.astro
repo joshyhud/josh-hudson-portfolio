@@ -1,0 +1,122 @@
+<details class="co2">
+  <summary class="co2__tab" aria-label="Toggle page sustainability information">
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+    >
+      <circle cx="12" cy="12" r="9" />
+      <ellipse cx="12" cy="12" rx="4" ry="9" />
+      <path d="M3 12h18M5 7h14M5 17h14" />
+    </svg>
+  </summary>
+  <div class="co2__panel">
+    <h2>Sustainability</h2>
+
+    <strong>Estimated emissions</strong>
+    <span id="result">Calculating emissions...</span>
+    <p>
+      This estimate uses data transferred during your visit. Cached and
+      cross-origin resources may not be included, so it may be too low.
+    </p>
+
+    <strong>Hosting</strong>
+    <span id="hosting">Checking hosting...</span>
+    <p>Hosting status comes from the Green Web Foundation's directory.</p>
+
+    <p>
+      The panel turns red if hosting isn't listed as green or the estimate
+      reaches 0.360 g CO₂e. This uses Website Carbon's F-rating boundary as a
+      guide; the measurements may differ.
+    </p>
+
+    <a
+      class="btn"
+      href="https://www.thegreenwebfoundation.org/green-web-check/"
+    >
+      Learn about green hosting
+    </a>
+  </div>
+</details>
+
+<script>
+  import { co2 } from "@tgwf/co2";
+  import type { log } from "node:console";
+
+  // Show the estimated emissions and Greencheck's hosting classification.
+  const result = document.getElementById("result");
+  const hosting = document.getElementById("hosting");
+  const block = document.querySelector(".co2");
+
+  // Check the production domain when developing locally.
+  const hostname =
+    location.hostname === "localhost" ? "josh-hudson.co.uk" : location.hostname;
+
+  try {
+    // Greencheck identifies whether the domain is listed as green hosted.
+    const response = await fetch(
+      `https://api.thegreenwebfoundation.org/api/v3/greencheck/${encodeURIComponent(hostname)}`,
+    );
+
+    if (!response.ok) {
+      throw new Error(`Greencheck failed: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (typeof data.green !== "boolean") {
+      throw new Error("Greencheck returned an invalid response");
+    }
+
+    if (hosting) {
+      hosting.innerHTML = data.green
+        ? "<strong>Result: Green hosting</strong>"
+        : "<strong>Result: Hosting not listed as green</strong>";
+    }
+
+    if (!data.green) {
+      block?.classList.add("needs-work");
+    }
+
+    // Wait until the initial page load has finished before measuring transfers.
+    if (document.readyState !== "complete") {
+      await new Promise((resolve) =>
+        window.addEventListener("load", resolve, { once: true }),
+      );
+    }
+
+    // Cached or cross-origin resources may report zero, so this can underestimate.
+    const entries = [
+      ...performance.getEntriesByType("navigation"),
+      ...performance.getEntriesByType("resource"),
+    ];
+
+    const bytesSent = entries.reduce(
+      (total, entry) => total + (entry.transferSize || 0),
+      0,
+    );
+
+    if (bytesSent === 0) {
+      throw new Error("Page transfer size is unavailable");
+    }
+
+    // Estimate CO2e for the measured bytes, accounting for the hosting result.
+    const grams = new co2().perByte(bytesSent, data.green);
+
+    // Website Carbon's F rating starts at 0.360 g CO2e per page view.
+    const needsWork = !data.green || grams >= 0.36;
+    block?.classList.toggle("needs-work", needsWork);
+    block?.classList.toggle("doing-good", !needsWork);
+
+    if (result) {
+      result.innerHTML = `<strong>${grams.toFixed(2)} g CO₂</strong> for this page load`;
+    }
+  } catch (error) {
+    console.error("Could not calculate page emissions:", error);
+    if (result) result.textContent = "Emissions estimate unavailable";
+    if (hosting?.textContent === "Checking hosting...") {
+      hosting.textContent = "Hosting status unavailable";
+    }
+  }
+</script>
