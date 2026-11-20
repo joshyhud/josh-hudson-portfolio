@@ -24,6 +24,8 @@
   "devDependencies": {
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.5.2",
+    "prettier": "^3.10.1",
+    "prettier-plugin-astro": "^1.1.2",
     "sass-embedded": "^1.98.0"
   }
 }

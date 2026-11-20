@@ -13,9 +13,11 @@
   .chat {
     display: flex;
     align-items: center;
+    justify-content: center;
     color: $font-color;
     text-decoration: none;
     transition: color 0.3s ease;
+    gap: 0.5rem;
 
     &:hover {
       color: $accent-color;
